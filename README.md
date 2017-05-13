@@ -1,7 +1,7 @@
 # keras_superpixel_pooling
 Implementation of superpixel pooling layer in Keras. See keras.layers.pooling for implemenation.
 
-The concept of superpixel pooling layer can be found in the paper: "Weakly Supervised Semantic Segmentation Using Superpixel Pooling Network", AAAI 2017. This layer takes two inputs, a superpixel map and a feature map. It pools the features (in this implementation, average-pool) belonging to the same superpixel and forms a `1 x K` vector where K is the feature map depth/channels. 
+The concept of superpixel pooling layer can be found in the paper: "Weakly Supervised Semantic Segmentation Using Superpixel Pooling Network", AAAI 2017. This layer takes two inputs, a superpixel map (size `M x N`) and a feature map (size `K x M x N`). It pools the features (in this implementation, average-pool) belonging to the same superpixel and forms a `1 x K` vector where `K` is the feature map depth/channels. 
 
 A naive implementation will require three for loops: one iterating over batch, another over row and the last one iterating over columns of the feature map and pooling it on-the-fly. However, this gives "maximum recursion depth exceeded" error in Theano whenever you try to compile a model containing this layer. This error occurs even when the feature map width and height is only 32.
 
